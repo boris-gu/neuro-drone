@@ -1,12 +1,26 @@
 #!/usr/bin/env python3
 
+import argparse
 from socket import *
 
+# ПАРСЕР
+descr = 'Drone message sender.\n'
+descr += 'COMMAND: type(first letter) + force([0,100])\n'
+descr += 'EXAMPLE: r34\n\n'
+descr += 'COMMAND TYPES:\nUp\nDown\nForward\nBack\nLeft\nRight'
+
+parser = argparse.ArgumentParser(description=descr,
+                                 formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('--host', default='localhost', help='host IP')
+args = parser.parse_args()
+
+# КЛИЕНТ
 command_type = 'udfblr'  # Up Down Forward Back Left Right
 
-host = 'localhost'
+#host = 'localhost'
+print(args.host)
 port = 50202
-addr = (host, port)
+addr = (args.host, port)
 
 udp_socket = socket(AF_INET, SOCK_DGRAM)
 
@@ -23,8 +37,8 @@ try:
             if force < 0 or force > 100:
                 print('Incorrect command')
             else:
-                data = str.encode(data)
-                udp_socket.sendto(data, addr)
+                #data = str.encode(data)
+                udp_socket.sendto(data.encode(), addr)
         else:
             print('Incorrect command')
 except KeyboardInterrupt:

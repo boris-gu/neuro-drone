@@ -26,9 +26,8 @@ print(f'Start server, port: {port}')
 
 try:
     while not drone.is_shutdown():
-        print("OK")
-        data, address = udp_socket.recvfrom(8)
-        print(data, addr)
+        data, client_arrd = udp_socket.recvfrom(8)
+        print(data, client_arrd)
         data = data.decode()
         c_t = data[0]
         if c_t in command_type:

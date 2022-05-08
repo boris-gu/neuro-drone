@@ -5,7 +5,7 @@ from socket import *
 import argparse
 
 parser = argparse.ArgumentParser(description='Server-drone')
-parser.add_argument('-l', '--logfile', dest='logfile', action='store_false',
+parser.add_argument('-l', '--logfile', dest='logfile', action='store_true',
                     help='if set, output is saved to a file "neuro_drone_log.txt"')
 args = parser.parse_args()
 
@@ -21,6 +21,7 @@ drone.start()
 
 if args.logfile:
     log.write('Armed\n')
+    print('Logfile open')
 print('Armed')
 drone.set_local_pose(0, 0, 3)
 while not drone.point_is_reached():
@@ -55,7 +56,6 @@ try:
                 print('Incorrect command')
             else:
                 force /= 100
-                print(force)
                 if c_t == 'u':
                     drone.set_velocity(0, 0, max_speed_z*force)
                 elif c_t == 'd':
@@ -78,8 +78,10 @@ except Exception as e:
         log.write(e)
     print(e)
 finally:
+    print()
     if args.logfile:
         log.write('Close server, landing')
         log.close()
-    print('\nClose server, landing')
+        print('Logfile closed')
+    print('Close server, landing')
     udp_socket.close()

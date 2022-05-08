@@ -28,7 +28,9 @@ try:
     while True:
         data = input('> ')
         # Проверка верности команды
-        if data[0] in command_type:
+        if data == '' or data == 'start' or data == 'stop':
+            udp_socket.sendto(data.encode(), addr)
+        elif data[0] in command_type:
             try:
                 force = int(data[1:])
             except ValueError:

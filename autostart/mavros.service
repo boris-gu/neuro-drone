@@ -1,0 +1,13 @@
+[Unit]
+Description=MAVROS launcher
+
+[Service]
+User=pi
+ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
+                        roslaunch mavros px4.launch fcu_url:=serial:///dev/serial0:921600"
+
+StandardOutput=file:/home/pi/mavros.log
+StandardError=file:/home/pi/mavros.log
+
+[Install]
+WantedBy=multi-user.target

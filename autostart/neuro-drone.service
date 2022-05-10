@@ -1,0 +1,17 @@
+[Unit]
+Description=Neuro-drone server launcher
+Requires=mavros.service
+
+[Service]
+User=pi
+ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
+                        sleep 10; \
+                        /home/pi/neuro-drone/server-drone.py"
+
+StandardOutput=file:/home/pi/neuro-drone.log
+StandardError=file:/home/pi/neuro-drone.log
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

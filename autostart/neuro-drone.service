@@ -5,6 +5,7 @@ Requires=mavros.service
 [Service]
 User=pi
 Environment=PYTHONUNBUFFERED=1
+ExecStartPre=+rm /home/pi/neuro-drone.log
 ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
                         /home/pi/neuro-drone/server-drone.py"
 

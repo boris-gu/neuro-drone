@@ -3,6 +3,7 @@ Description=MAVROS launcher
 
 [Service]
 User=pi
+ExecStartPre=+rm /home/pi/mavros.log
 ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
                         roslaunch mavros px4.launch fcu_url:=serial:///dev/serial0:921600"
 

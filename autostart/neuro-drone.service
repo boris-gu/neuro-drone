@@ -1,5 +1,6 @@
 [Unit]
 Description=Neuro-drone server launcher
+Requires=mavros.Service
 
 [Service]
 User=pi

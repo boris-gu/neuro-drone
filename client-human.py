@@ -48,5 +48,5 @@ except KeyboardInterrupt:
 except Exception as e:
     print(e)
 finally:
-    print('\nClose')
+    print('\nClose client')
     udp_socket.close()

@@ -1,9 +1,10 @@
 [Unit]
 Description=Neuro-drone server launcher
-Requires=mavros.Service
+Requires=mavros.service
 
 [Service]
 User=pi
+Environment=PYTHONUNBUFFERED=1
 ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
                         /home/pi/neuro-drone/server-drone.py"
 

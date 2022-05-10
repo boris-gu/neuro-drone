@@ -8,6 +8,8 @@ ExecStart=/bin/bash -c ". /opt/ros/noetic/setup.bash; \
 
 StandardOutput=file:/home/pi/mavros.log
 StandardError=file:/home/pi/mavros.log
+Restart=on-failure
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

@@ -78,4 +78,37 @@ stop
 3. Запустите скрипт `client-human.py` и начните вводить команды.
 
 ### Запуск на БВС
-Проводятся тесты
+Необходимо настроить на БВС автозапуск MAVROS и сервера, чтобы не приходилось подключаться по SSH и запускать их самостоятельно.
+
+```bash
+# Скопировать файлы
+cd
+sudo cp ./neuro-drone/autostart/mavros.service /etc/systemd/system/
+sudo cp ./neuro-drone/autostart/neuro-drone.service /etc/systemd/system/
+
+# Запустить службы
+sudo systemctl start mavros.service
+sudo systemctl start neuro-drone.service
+
+# Добавить автозапуск служб
+sudo systemctl enable mavros.service
+sudo systemctl enable neuro-drone.service
+
+# ДОПОЛНИТЕЛЬНЫЕ КОМАНДЫ
+# Вывод лог-файлов
+cat mavros.log
+cat neuro-drone.log
+
+# Просмотреть статус служб
+systemctl status mavros.service
+systemctl status neuro-drone.service
+
+# Если вы редактировали файлы служб,
+# то необходимо перезагрузить демон systemctl
+sudo systemctl daemon-reload
+```
+
+### Особенности запуска
+Работа сервера построена таким образом, что автопилот может перейти в режим OFFBOARD (когда управление поступает от бортового компьютера) только один раз.  
+Это сделано ради безопасности. В случае технических неполадок, необходимо переключить режим и посадить БВС самостоятельно.  
+Для повторного использования просто выключите и включите БВС.

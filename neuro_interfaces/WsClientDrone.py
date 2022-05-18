@@ -34,6 +34,9 @@ class WsClientDrone(Thread):
 
     def run(self):
         try:
+            for i in range(10):
+                self.send_drone_msg('start')
+                time.sleep(0.1)
             while True:
                 try:
                     arm_band_msg = self.queue.get_nowait()
@@ -53,8 +56,10 @@ class WsClientDrone(Thread):
                     self.send_drone_msg(
                         self.directions[self.current_direction] + speed
                     )
-
                 time.sleep(0.01)
         finally:
+            for i in range(10):
+                self.send_drone_msg('stop')
+                time.sleep(0.1)
             self.udp_socket.close()
             self.ws.close()

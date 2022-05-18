@@ -23,7 +23,9 @@ max_speed_z = 0.5
 
 is_started = False
 is_open = False
-drone = Drone_api(redefine_zero_point=True, disable_signals=True)
+drone = Drone_api(redefine_zero_point=True,
+                  offb_switch=True,
+                  disable_signals=True)
 
 command_type = 'udfblr'  # Up Down Forward Back Left Right
 port = 50202
